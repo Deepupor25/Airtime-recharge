@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgb(177, 177, 33);
+    }
+    #main{
+        background-color: yellow;
+        line-height: 40px;
+        margin-left: 500px;
+        margin-top: 40px;
+        width: fit-content;
+        padding: 15px;
+        border-radius: 40px;
+    }
+    #amount, #network{
+        padding: 2px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 4px;
+        width: 80px;
+        height: 30px;
+    }
+    #gg{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 300px;
+    }
+    #ggaa{
+        width: 250px;
+        /* background-color: aquamarine; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+<body>
+    <main id="main">
+        <h1  style="font-family: 'Times New Roman', Times, serif;">Network Provider PIN Generator</h1>
+        <div id="ggaa">
+            <h3 style="font-family: 'Times New Roman', Times, serif;">Choose Network:</h3><select name="" id="network">
+                <option value="MTN">MTN</option>
+            </select>
+        </div>
+       <div id="gg">
+            <h3 style="font-family: 'Times New Roman', Times, serif;">Amount:</h3>
+            <select name="" id="amount">
+                <option value="100">100</option>
+            </select>
+            <button onclick="genPin()" style="border: none; background-color: rgb(97, 91, 9); color: beige;border-radius: 3px; padding: 9px;">Generate Pin</button>
+
+       </div>
+
+        <h1 id="dispPin"></h1>
+
+        <h2 style="font-family: 'Times New Roman', Times, serif;">Load Generated Pin</h2>
+        <input type="text" id="LoadAirtime" placeholder="Dial *311* the generated code #" style="padding: 7px; width: 350px;border-radius: 12px;">
+        <button onclick="LoadAirtimeCard()" style="border: none; background-color: rgb(165, 157, 42); color: beige;border-radius: 3px; padding: 9px;">Recharge</button>
+        
+        <!-- <h1 id="dev"></h1> -->
+    </main>
+</body>
+</html>
+
+<script>
+    let amount = document.getElementById("amount");
+    let network = document.getElementById("network");
+    let LoadAirtime = document.getElementById("LoadAirtime");
+
+    function genPin(){
+        let pin = "";
+            for (let i = 0; i < 15; i++) {
+                    pin += Math.floor(Math.random() * 10);
+                }
+        dispPin.innerHTML = pin
+        
+        alert(`You have generated ${network.value} of ${amount.value}`)
+    }
+
+    function LoadAirtimeCard(){
+        let pin = document.getElementById("dispPin").innerHTML
+        if(!LoadAirtime.value.startsWith("*311*") || !LoadAirtime.value.endsWith("#") || !LoadAirtime.value.includes(pin)){
+            alert("Invalid Code")
+        }else{
+            alert(`You have recharged ${network.value} of ${amount.value}`)
+        }
+    }
+
+</script>
